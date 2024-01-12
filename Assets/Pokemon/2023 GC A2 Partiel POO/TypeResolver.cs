@@ -10,6 +10,9 @@ namespace _2023_GC_A2_Partiel_POO.Level_2
 
     public class TypeResolver
     {
+        static float _normalFactor = 1f;
+        static float _resistFactor = 0.8f;
+        static float _vulnerableFactor = 1.2f;
 
         /// <summary>
         /// Récupère le facteur multiplicateur pour la résolution des résistances/faiblesses
@@ -27,7 +30,39 @@ namespace _2023_GC_A2_Partiel_POO.Level_2
         /// </returns>
         public static float GetFactor(TYPE attacker, TYPE receiver)
         {
-            throw new NotImplementedException();
+            if (attacker == receiver) return _normalFactor;
+            if (attacker == TYPE.NORMAL || receiver == TYPE.NORMAL) return _normalFactor;
+            switch (receiver)
+            {
+                case TYPE.WATER:
+                    switch (attacker)
+                    {
+                        case TYPE.GRASS:
+                            return _vulnerableFactor;
+                        case TYPE.FIRE:
+                            return _resistFactor;
+                    }
+                    break;
+                case TYPE.FIRE:
+                    switch (attacker)
+                    {
+                        case TYPE.WATER:
+                            return _vulnerableFactor;
+                        case TYPE.GRASS:
+                            return _resistFactor;
+                    }
+                    break;
+                case TYPE.GRASS:
+                    switch (attacker)
+                    {
+                        case TYPE.FIRE:
+                            return _vulnerableFactor;
+                        case TYPE.WATER:
+                            return _resistFactor;
+                    }
+                    break;
+            }
+            return -1;
         }
 
     }
