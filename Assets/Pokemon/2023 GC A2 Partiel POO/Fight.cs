@@ -49,8 +49,8 @@ namespace _2023_GC_A2_Partiel_POO.Level_2
             if (slowest.IsAlive) fastest.ReceiveAttack(slowest, fromSlowest);
 
 
-            if (fastest.IsAlive) fastest.CurrentStatus.EndTurn();
-            if (slowest.IsAlive) slowest.CurrentStatus.EndTurn();
+            if (fastest.IsAlive && fastest.CurrentStatus != null) fastest.CurrentStatus.EndTurn();
+            if (slowest.IsAlive && fastest.CurrentStatus != null) slowest.CurrentStatus.EndTurn();
         }
 
     }
